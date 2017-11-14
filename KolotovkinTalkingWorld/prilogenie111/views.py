@@ -221,6 +221,25 @@ def get_list_of_all_themas(request):
     answer_str = ""
     for xxx in my_records_arr:
         if len(xxx.theme_text) > 0:
-            answer_str = answer_str + ("Пользователь " + xxx.user_login + "---@@@@@~~~~~~~~~~~@-@-@@@-@@@@-----") + xxx.theme_text + "~~@@~~@@~~@@~~@@==="
+            answer_str = answer_str + (str(xxx.pk) + "------~~~~~~-~-~-~--" + "Пользователь " + xxx.user_login + "---@@@@@~~~~~~~~~~~@-@-@@@-@@@@-----") + xxx.theme_text + "~~@@~~@@~~@@~~@@==="
 
     return HttpResponse(str(answer_str))
+
+def comment_theme(request):
+    return render(request, 'prilogenie111/comment_theme.html', {})
+
+def get_all_comments_of_the_theme(request):
+    flag = control_user(request)
+    if flag == False:
+        return HttpResponseRedirect("/callback/auth_no")
+
+    theme_number = int(request.GET['theme_number'])
+
+    themes = MyTheme.objects.filter(pk=theme_number)
+    theme = themes[0]
+    user_login = str(theme.user_login)
+    theme_text = str(theme.theme_text)
+
+    result_string = user_login + "------~~~~~~-~-~-~--" + theme_text + "------~~~~~~-~-~-~--"
+
+    return HttpResponse(str(result_string))

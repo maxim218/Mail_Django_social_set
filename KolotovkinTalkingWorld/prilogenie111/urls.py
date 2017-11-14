@@ -22,4 +22,6 @@ urlpatterns = [
     url(r'^discuss_forums/', views.discuss_forums, name='discuss_forums'),
     url(r'^add_discuss_theme_to_db/', views.add_discuss_theme_to_db, name='add_discuss_theme_to_db'),
     url(r'^get_list_of_all_themas/', views.get_list_of_all_themas, name='get_list_of_all_themas'),
+    url(r'^comment_theme/', views.comment_theme, name='comment_theme'),
+    url(r'^get_all_comments_of_the_theme/', views.get_all_comments_of_the_theme, name='get_all_comments_of_the_theme'),
 ]

@@ -75,6 +75,11 @@
         }
     };
 
+    let massModified = [];
+    let massNormal = [];
+    let mass = [];
+    let numbers = [];
+
     function getListOfThemas() {
         let r = new XMLHttpRequest();
         r.open("GET", "/get_list_of_all_themas");
@@ -84,10 +89,6 @@
             if(r.readyState === 4 && r.status === 200) {
 
                 const result = r.responseText + "";
-                let massModified = [];
-                let massNormal = [];
-
-                let mass = [];
                 mass = result.split("~~@@~~@@~~@@~~@@===");
 
                 for(let i = 0; i < mass.length; i++) {
@@ -96,11 +97,17 @@
                     if(s.length !== 0) {
                         let arr = [];
                         arr = s.split("---@@@@@~~~~~~~~~~~@-@-@@@-@@@@-----");
+
+                        massNormal.push(arr[1]);
+
+                        let mmm = [];
+                        mmm = arr[0].split("------~~~~~~-~-~-~--");
+
+                        numbers.push(parseInt(mmm[0]));
+                        arr[0] = mmm[1];
+
                         arr[0] = "<h3>" + htmlentities(arr[0]) + "</h3>";
                         arr[1] = htmlentities(arr[1]);
-
-
-                        massNormal.push(s);
                         massModified.push(arr[0] + arr[1]);
                     }
                 }
@@ -108,7 +115,7 @@
                 let answerStr = "";
 
                 for(let i = 0; i < massModified.length; i++) {
-                       let strRecord = "<div class = 'themeBox'>";
+                       let strRecord = "<div class = 'themeBox' onclick = 'doBox(this)' id = '" + "box_number_" + i + "'>";
                        strRecord += massModified[i];
                        strRecord += "<br><br></div>";
                        strRecord += '<div style = "padding-top: 15px"></div>';
@@ -119,6 +126,14 @@
             }
         }
     }
+
+    function doBox(element) {
+        const idNumber = parseInt(element.id.split("box_number_")[1]);
+        const themeText = numbers[idNumber] + "";
+        localStorage.setItem("themeTextFieldContent", themeText);
+        window.location = "/comment_theme";
+    }
 </script>
+
 
 {% endblock %}

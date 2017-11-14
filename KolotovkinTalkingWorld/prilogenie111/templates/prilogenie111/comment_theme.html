@@ -1,0 +1,88 @@
+{% extends 'prilogenie111/my_template.html' %}
+{% block content %}
+
+<style>
+    .linkStyle {
+        cursor: pointer;
+        text-decoration: underline;
+        color: blue;
+    }
+
+    .linkStyle:hover {
+        color: #4a62dd;
+    }
+
+    #myHeaderBox {
+        padding: 20px;
+        border: solid 2px black;
+        border-radius: 10px;
+    }
+</style>
+
+<div id = "myHeaderBox" align = "center">
+    <span onclick = " window.location = '/my_page' " class = "linkStyle">Моя страница</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/users_list' " class = "linkStyle">Страницы других пользователей</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/discuss_forums' "  class = "linkStyle">Темы обсуждения</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = "goOut()" class = "linkStyle">Выход</span>
+</div>
+
+
+<div style = "padding-top: 25px;"></div>
+<h1>Комментирование темы</h1>
+<hr>
+<div style = "padding-top: 15px"></div>
+
+<div id = "aboutAuthor"></div>
+
+<script>
+    document.title = "Комментирование темы";
+    window.onload = function() {
+        const loginValue = localStorage.getItem('userLogin');
+        if(loginValue === null || loginValue === undefined) {
+            window.location = "/";
+        } else {
+            controlSession();
+            elem("centerBox").hidden = false;
+
+            const theme = localStorage.getItem("themeTextFieldContent");
+            if(theme === null || theme === undefined) {
+                window.location = "/";
+            } else {
+
+                const themeNumber = parseInt(theme);
+                getCommentsOfTheme(themeNumber);
+            }
+        }
+    };
+
+    function getCommentsOfTheme(themeNumber) {
+        let r = new XMLHttpRequest();
+        r.open("GET", "/get_all_comments_of_the_theme?theme_number=" + themeNumber);
+        r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+        r.send(null);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4 && r.status === 200) {
+               const result = r.responseText + "";
+               let mass = [];
+               mass = result.split("------~~~~~~-~-~-~--");
+               let userName = mass[0] + "";
+               let themeText = mass[1];
+
+               let questionContent = "<p style = 'font-size: 25px'>Автор <b>" + userName + "</b></p>";
+               questionContent += "<div style = 'color: white; font-size: 22px; background: #0c87cc; padding: 15px; border-radius: 5px;'>";
+               questionContent += "<h3>Тема</h3>";
+               questionContent += htmlentities(themeText);
+               questionContent += "<br><br></div>";
+               questionContent += '<div style = "padding-top: 15px"></div>';
+
+               elem('aboutAuthor').innerHTML = questionContent;
+            }
+        }
+    }
+</script>
+
+
+{% endblock %}

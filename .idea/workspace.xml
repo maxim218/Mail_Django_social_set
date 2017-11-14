@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="c9bdabd7-ac39-49a9-8c5d-585a3926848c" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KolotovkinTalkingWorld/db.sqlite3" afterPath="$PROJECT_DIR$/KolotovkinTalkingWorld/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/admin.py" afterPath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/models.py" afterPath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/callback.html" afterPath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/callback.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/discuss_forums.html" afterPath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/discuss_forums.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/urls.py" afterPath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/urls.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/views.py" afterPath="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/views.py" />
     </list>
@@ -18,11 +16,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="comment_theme.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/comment_theme.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="439">
+              <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+              <folding>
+                <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+                <marker date="1510665254703" expanded="true" signature="2374:2389" ph="..." />
+                <marker date="1510665254703" expanded="true" signature="2476:2562" ph="..." />
+                <marker date="1510665254703" expanded="true" signature="2778:2795" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="221" column="30" lean-forward="true" selection-start-line="221" selection-start-column="30" selection-end-line="221" selection-end-column="30" />
+            <state relative-caret-position="602">
+              <caret line="242" column="93" lean-forward="true" selection-start-line="242" selection-start-column="93" selection-end-line="242" selection-end-column="93" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
@@ -30,38 +43,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="discuss_forums.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/discuss_forums.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="367">
-              <caret line="110" column="54" lean-forward="false" selection-start-line="110" selection-start-column="54" selection-end-line="110" selection-end-column="54" />
-              <folding>
-                <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#textarea#0;n#form#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#0;n#form#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#form#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-                <marker date="1510660789505" expanded="true" signature="3629:3646" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/urls.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="432">
-              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="my_page.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/my_page.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="538">
-              <caret line="151" column="20" lean-forward="true" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="20" />
+            <state relative-caret-position="520">
+              <caret line="150" column="46" lean-forward="true" selection-start-line="150" selection-start-column="46" selection-end-line="150" selection-end-column="46" />
               <folding>
                 <element signature="e#306#312#0" expanded="true" />
                 <element signature="e#312#318#0" expanded="true" />
@@ -128,9 +114,10 @@
         <option value="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/models.py" />
         <option value="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/admin.py" />
         <option value="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/callback.html" />
-        <option value="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/urls.py" />
         <option value="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/discuss_forums.html" />
+        <option value="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/urls.py" />
         <option value="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/views.py" />
+        <option value="$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/comment_theme.html" />
       </list>
     </option>
   </component>
@@ -261,7 +248,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="437" y="19" width="1857" height="1092" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25815368" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -445,6 +431,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="257">
           <caret line="87" column="64" lean-forward="false" selection-start-line="87" selection-start-column="64" selection-end-line="87" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -518,34 +505,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/callback.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="337">
           <caret line="46" column="175" lean-forward="false" selection-start-line="46" selection-start-column="175" selection-end-line="46" selection-end-column="175" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/static/controlSessionScript.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="576">
-          <caret line="47" column="5" lean-forward="true" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -560,23 +523,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/discuss_forums.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="110" column="54" lean-forward="false" selection-start-line="110" selection-start-column="54" selection-end-line="110" selection-end-column="54" />
+        <state relative-caret-position="705">
+          <caret line="127" column="5" lean-forward="true" selection-start-line="127" selection-start-column="5" selection-end-line="127" selection-end-column="5" />
           <folding>
             <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
             <element signature="n#style#0;n#textarea#0;n#form#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#form#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#form#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <marker date="1510660789505" expanded="true" signature="3629:3646" ph="..." />
+            <marker date="1510663405944" expanded="true" signature="3882:3899" ph="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/static/controlSessionScript.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="49" column="0" lean-forward="true" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="25" column="69" lean-forward="true" selection-start-line="25" selection-start-column="69" selection-end-line="25" selection-end-column="69" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="602">
+          <caret line="242" column="93" lean-forward="true" selection-start-line="242" selection-start-column="93" selection-end-line="242" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/my_page.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="538">
-          <caret line="151" column="20" lean-forward="true" selection-start-line="151" selection-start-column="20" selection-end-line="151" selection-end-column="20" />
+        <state relative-caret-position="520">
+          <caret line="150" column="46" lean-forward="true" selection-start-line="150" selection-start-column="46" selection-end-line="150" selection-end-column="46" />
           <folding>
             <element signature="e#306#312#0" expanded="true" />
             <element signature="e#312#318#0" expanded="true" />
@@ -611,12 +608,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/views.py">
+    <entry file="file://$PROJECT_DIR$/KolotovkinTalkingWorld/prilogenie111/templates/prilogenie111/comment_theme.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="221" column="30" lean-forward="true" selection-start-line="221" selection-start-column="30" selection-end-line="221" selection-end-column="30" />
+        <state relative-caret-position="439">
+          <caret line="33" column="29" lean-forward="true" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
           <folding>
-            <element signature="e#0#35#0" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+            <marker date="1510665254703" expanded="true" signature="2374:2389" ph="..." />
+            <marker date="1510665254703" expanded="true" signature="2476:2562" ph="..." />
+            <marker date="1510665254703" expanded="true" signature="2778:2795" ph="..." />
           </folding>
         </state>
       </provider>
