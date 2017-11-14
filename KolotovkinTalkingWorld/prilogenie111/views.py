@@ -4,6 +4,7 @@ from .models import MyUsers
 from .models import MyUsersInfo
 from .models import MyRecords
 from .models import MyTheme
+from .models import MyComments
 from django.http import HttpResponseRedirect
 
 def authorization(request):
@@ -240,6 +241,27 @@ def get_all_comments_of_the_theme(request):
     user_login = str(theme.user_login)
     theme_text = str(theme.theme_text)
 
-    result_string = user_login + "------~~~~~~-~-~-~--" + theme_text + "------~~~~~~-~-~-~--"
+    theme_number = str(theme_number)
+
+    my_arr = MyComments.objects.filter(theme_number=theme_number).order_by('pk')
+    big_string = ""
+
+    for xxx in my_arr:
+        if(len(xxx.comment_text) > 0):
+            big_string = big_string + xxx.user_login + "~~~~~~@@@@@@--@@@@@@@@@" + xxx.comment_text + "@@@@@@@@@@@--------~~~~--"
+
+    result_string = user_login + "------~~~~~~-~-~-~--" + theme_text + "------~~~~~~-~-~-~--" + big_string
 
     return HttpResponse(str(result_string))
+
+def add_comment(request):
+    flag = control_user(request)
+    if flag == False:
+        return HttpResponseRedirect("/callback/auth_no")
+
+    theme_number = str(request.POST['nnn']);
+    user_login = str(request.session["userLogin"])
+    comment_text = str(request.POST['tttt']);
+
+    MyComments.objects.create(user_login=user_login, theme_number=theme_number, comment_text=comment_text)
+    return HttpResponseRedirect("/callback/add_comment_ok")

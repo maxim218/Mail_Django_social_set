@@ -24,4 +24,6 @@ urlpatterns = [
     url(r'^get_list_of_all_themas/', views.get_list_of_all_themas, name='get_list_of_all_themas'),
     url(r'^comment_theme/', views.comment_theme, name='comment_theme'),
     url(r'^get_all_comments_of_the_theme/', views.get_all_comments_of_the_theme, name='get_all_comments_of_the_theme'),
+    url(r'^add_comment/', views.add_comment, name='add_comment'),
 ]
+

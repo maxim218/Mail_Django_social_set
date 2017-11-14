@@ -32,3 +32,11 @@ class MyTheme(models.Model):
 
     def __str__(self):
         return self.user_login
+
+class MyComments(models.Model):
+    user_login = models.TextField()
+    theme_number = models.TextField()
+    comment_text = models.TextField()
+
+    def __str__(self):
+        return self.user_login

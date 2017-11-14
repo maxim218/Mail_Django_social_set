@@ -37,6 +37,22 @@
 
 <div id = "aboutAuthor"></div>
 
+<div style = "padding-top: 30px"></div>
+
+<form action = "/add_comment/" method = "POST">
+    {% csrf_token %}
+    <p>Введите текст комментария</p>
+    <input type = 'nnn' id = 'nnn' name = 'nnn' hidden>
+    <textarea  name = 'tttt' spellcheck = 'false' autocomplete = 'off' class = 'textField' style = "height: 200px; max-height: 300px; max-width: 800px;"></textarea>
+    <div style = "padding-top: 30px"></div>
+    <input type = 'submit' value = 'Отправить комментарий' class="ui-button ui-widget ui-corner-all">
+    <div style = "padding-top: 30px"></div>
+</form>
+
+<div style = "padding-top: 30px"></div>
+
+<div id = "commentsContent"></div>
+
 <script>
     document.title = "Комментирование темы";
     window.onload = function() {
@@ -53,6 +69,7 @@
             } else {
 
                 const themeNumber = parseInt(theme);
+                elem("nnn").value = themeNumber;
                 getCommentsOfTheme(themeNumber);
             }
         }
@@ -79,6 +96,28 @@
                questionContent += '<div style = "padding-top: 15px"></div>';
 
                elem('aboutAuthor').innerHTML = questionContent;
+
+               let commentsString = mass[2] + "";
+
+               let arr = commentsString.split("@@@@@@@@@@@--------~~~~--");
+               arr = arr.reverse();
+
+               for(let i = 0; i < arr.length; i++) {
+                   const s = arr[i] + "";
+                   if(s !== "") {
+                       let mmm = s.split("~~~~~~@@@@@@--@@@@@@@@@");
+                       let user = htmlentities(mmm[0]);
+                       let text = htmlentities(mmm[1]);
+
+                       let comment = "<div style = 'background: #CCCCCC; padding: 15px; border-radius: 5px;'>";
+                       comment += "<h3>" + user + "</h3>";
+                       comment += "<p>" + text + "</p>" + "";
+                       comment += "</div>";
+                       comment += "<div style = 'padding-top: 25px'></div>";
+
+                       elem("commentsContent").innerHTML += comment;
+                   }
+               }
             }
         }
     }
