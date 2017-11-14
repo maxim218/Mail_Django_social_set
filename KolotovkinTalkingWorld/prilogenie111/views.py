@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from .models import MyUsers
 from .models import MyUsersInfo
 from .models import MyRecords
+from .models import MyTheme
 from django.http import HttpResponseRedirect
 
 def authorization(request):
@@ -192,5 +193,34 @@ def get_records_of_user(request):
     answer_str = ""
     for xxx in my_records_arr:
         answer_str = answer_str + xxx.user_record + "~~@@~~@@~~@@~~@@==="
+
+    return HttpResponse(str(answer_str))
+
+def discuss_forums(request):
+    return render(request, 'prilogenie111/discuss_forums.html', {})
+
+def add_discuss_theme_to_db(request):
+    flag = control_user(request)
+    if flag == False:
+        return HttpResponseRedirect("/callback/auth_no")
+
+    user_login = str(request.session["userLogin"])
+    theme_text = str(request.POST['tttt'])
+
+    MyTheme.objects.create(user_login=user_login, theme_text=theme_text)
+    return HttpResponseRedirect("/callback/create_theme_ok")
+
+def get_list_of_all_themas(request):
+    flag = control_user(request)
+    if flag == False:
+        return HttpResponseRedirect("/callback/auth_no")
+
+    my_records_arr = MyTheme.objects.order_by('pk')
+    my_records_arr = my_records_arr.reverse()
+
+    answer_str = ""
+    for xxx in my_records_arr:
+        if len(xxx.theme_text) > 0:
+            answer_str = answer_str + ("Пользователь " + xxx.user_login + "---@@@@@~~~~~~~~~~~@-@-@@@-@@@@-----") + xxx.theme_text + "~~@@~~@@~~@@~~@@==="
 
     return HttpResponse(str(answer_str))

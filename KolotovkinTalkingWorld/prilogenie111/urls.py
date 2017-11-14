@@ -19,4 +19,7 @@ urlpatterns = [
     url(r'^watch_user/', views.watch_user, name='watch_user'),
     url(r'^get_name_and_sername_of_user/', views.get_name_and_sername_of_user, name='get_name_and_sername_of_user'),
     url(r'^get_records_of_user/', views.get_records_of_user, name='get_records_of_user'),
+    url(r'^discuss_forums/', views.discuss_forums, name='discuss_forums'),
+    url(r'^add_discuss_theme_to_db/', views.add_discuss_theme_to_db, name='add_discuss_theme_to_db'),
+    url(r'^get_list_of_all_themas/', views.get_list_of_all_themas, name='get_list_of_all_themas'),
 ]

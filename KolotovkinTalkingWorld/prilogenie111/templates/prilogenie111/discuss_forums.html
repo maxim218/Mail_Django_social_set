@@ -1,0 +1,124 @@
+{% extends 'prilogenie111/my_template.html' %}
+{% block content %}
+
+<style>
+    .linkStyle {
+        cursor: pointer;
+        text-decoration: underline;
+        color: blue;
+    }
+
+    .linkStyle:hover {
+        color: #4a62dd;
+    }
+
+    #myHeaderBox {
+        padding: 20px;
+        border: solid 2px black;
+        border-radius: 10px;
+    }
+</style>
+
+<div id = "myHeaderBox" align = "center">
+    <span onclick = " window.location = '/my_page' " class = "linkStyle">Моя страница</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/users_list' " class = "linkStyle">Страницы других пользователей</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/discuss_forums' "  class = "linkStyle">Темы обсуждения</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = "goOut()" class = "linkStyle">Выход</span>
+</div>
+
+
+<div style = "padding-top: 25px;"></div>
+<h1>Темы обсуждения</h1>
+<hr>
+<div style = "padding-top: 30px"></div>
+
+<form enctype="multipart/form-data" action = "/add_discuss_theme_to_db/" method = "POST">
+        {% csrf_token %}
+        <p>Формулировка темы обсуждения</p>
+        <textarea  name = 'tttt' spellcheck = 'false' autocomplete = 'off' class = 'textField' style = "height: 200px; max-height: 300px; max-width: 800px;"></textarea>
+        <div style = "padding-top: 30px"></div>
+        <input type = 'submit' value = 'Добавить тему обсуждения' class="ui-button ui-widget ui-corner-all">
+        <div style = "padding-top: 30px"></div>
+</form>
+
+<div style = "padding-top: 30px"></div>
+
+<style>
+    .themeBox {
+        background: #CCCCCC;
+        padding: 15px;
+        border-radius: 5px;
+    }
+
+    .themeBox:hover {
+        background: #a6c9e2;
+        cursor: pointer;
+    }
+</style>
+
+
+<div id = "recodrsContent"></div>
+
+<script>
+    document.title = "Темы обсуждения";
+    window.onload = function() {
+        const loginValue = localStorage.getItem('userLogin');
+        if(loginValue === null || loginValue === undefined) {
+            window.location = "/";
+        } else {
+            controlSession();
+            elem("centerBox").hidden = false;
+            getListOfThemas();
+        }
+    };
+
+    function getListOfThemas() {
+        let r = new XMLHttpRequest();
+        r.open("GET", "/get_list_of_all_themas");
+        r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+        r.send(null);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4 && r.status === 200) {
+
+                const result = r.responseText + "";
+                let massModified = [];
+                let massNormal = [];
+
+                let mass = [];
+                mass = result.split("~~@@~~@@~~@@~~@@===");
+
+                for(let i = 0; i < mass.length; i++) {
+                    const s = mass[i];
+
+                    if(s.length !== 0) {
+                        let arr = [];
+                        arr = s.split("---@@@@@~~~~~~~~~~~@-@-@@@-@@@@-----");
+                        arr[0] = "<h3>" + htmlentities(arr[0]) + "</h3>";
+                        arr[1] = htmlentities(arr[1]);
+
+
+                        massNormal.push(s);
+                        massModified.push(arr[0] + arr[1]);
+                    }
+                }
+
+                let answerStr = "";
+
+                for(let i = 0; i < massModified.length; i++) {
+                       let strRecord = "<div class = 'themeBox'>";
+                       strRecord += massModified[i];
+                       strRecord += "<br><br></div>";
+                       strRecord += '<div style = "padding-top: 15px"></div>';
+                       answerStr += strRecord;
+                }
+
+                elem("recodrsContent").innerHTML = answerStr;
+            }
+        }
+    }
+</script>
+
+{% endblock %}

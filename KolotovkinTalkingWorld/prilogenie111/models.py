@@ -24,3 +24,11 @@ class MyRecords(models.Model):
 
     def __str__(self):
         return self.user_login
+
+
+class MyTheme(models.Model):
+    user_login = models.TextField()
+    theme_text = models.TextField()
+
+    def __str__(self):
+        return self.user_login
