@@ -1,0 +1,132 @@
+{% extends 'prilogenie111/my_template.html' %}
+{% block content %}
+
+<style>
+    .linkStyle {
+        cursor: pointer;
+        text-decoration: underline;
+        color: blue;
+    }
+
+    .linkStyle:hover {
+        color: #4a62dd;
+    }
+
+    #myHeaderBox {
+        padding: 20px;
+        border: solid 2px black;
+        border-radius: 10px;
+    }
+</style>
+
+<div id = "myHeaderBox" align = "center">
+    <span onclick = " window.location = '/my_page' " class = "linkStyle">Моя страница</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/users_list' " class = "linkStyle">Страницы других пользователей</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/discuss_forums' "  class = "linkStyle">Темы обсуждения</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = "goOut()" class = "linkStyle">Выход</span>
+</div>
+
+
+<div style = "padding-top: 25px;"></div>
+<h1>Страница пользователя</h1>
+<hr>
+
+<p style = "font-size: 22px;" id = "aboutUser"></p>
+<div style = "padding-top: 30px"></div>
+
+<table>
+    <tr>
+        <td>
+            <img id = "userImage" width = "128px" height = "128px" src = "./../static/images/userBasic.png">
+        </td>
+        <td>
+            <span style = "padding-left: 25px"></span>
+        </td>
+        <td style = "font-size: 20px">
+            <table>
+                <tr> <td>Фамилия: &nbsp;&nbsp;</td> <td id = 'x1'>неизвестно</td> </tr>
+                <tr> <td>Имя: </td> <td id = 'x2'>неизвестно</td> </tr>
+            </table>
+
+            <div style = "padding-top: 60px"></div>
+        </td>
+    </tr>
+</table>
+
+<div style = "padding-top: 30px"></div>
+<div id = "recodrsContent"></div>
+
+
+<script>
+    document.title = "Страница пользователя";
+    window.onload = function() {
+        const loginValue = localStorage.getItem('userLogin');
+        if(loginValue === null || loginValue === undefined) {
+            window.location = "/";
+        } else {
+            controlSession();
+            elem("aboutUser").innerHTML = "Просмотр страницы пользователя <b>" + localStorage.getItem('loginUserFowWatching')+ "</b>";
+            elem("centerBox").hidden = false;
+
+            getFamiliaAndNameOfUser();
+            getRecordsOfUser();
+        }
+    };
+
+    function getFamiliaAndNameOfUser() {
+        let r = new XMLHttpRequest();
+        r.open("GET", "/get_name_and_sername_of_user?login_login=" + localStorage.getItem('loginUserFowWatching'));
+        r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+        r.send(null);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4 && r.status === 200) {
+               const result = r.responseText + "";
+               let mass = [];
+               mass = result.split("@@@@@@~~~~~~");
+               elem("x1").innerHTML = htmlentities(mass[0] + "");
+               elem("x2").innerHTML = htmlentities(mass[1] + "");
+            }
+        }
+    }
+
+    function getRecordsOfUser() {
+        let r = new XMLHttpRequest();
+        r.open("GET", "/get_records_of_user?login_login=" + localStorage.getItem('loginUserFowWatching'));
+        r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+        r.send(null);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4 && r.status === 200) {
+               let bigString = r.responseText + "";
+               let mass = [];
+               mass = bigString.split("~~@@~~@@~~@@~~@@===");
+               let answerStr = "";
+
+               let n = 0;
+               for(let i = 0; i < mass.length; i++) {
+                   if(mass[i].length !== 0) {
+                       n++;
+                   }
+               }
+
+               for(let i = 0; i < mass.length; i++) {
+                   if(mass[i] !== "") {
+                       let strRecord = "<div style = 'background: #CCCCCC; padding: 15px; border-radius: 5px;'>";
+                       strRecord += "<h3>Запись " + n + "</h3>";
+                       n--;
+                       strRecord += htmlentities(mass[i]);
+                       strRecord += "<br><br></div>";
+                       strRecord += '<div style = "padding-top: 15px"></div>';
+                       answerStr += strRecord;
+                   }
+
+               }
+               elem("recodrsContent").innerHTML = answerStr;
+            }
+        }
+    }
+</script>
+
+{% endblock %}

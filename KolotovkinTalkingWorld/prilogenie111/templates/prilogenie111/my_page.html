@@ -1,0 +1,195 @@
+{% extends 'prilogenie111/my_template.html' %}
+{% block content %}
+
+
+<div id = 'my_dialog_1' title = "Редактирование профиля">
+    <form enctype="multipart/form-data" action = "/set_new_user_properties/" method = "POST">
+        {% csrf_token %}
+        <table>
+            <tr>
+                <td>Фамилия&nbsp;&nbsp;&nbsp;</td>
+                <td><input  type = 'text' spellcheck = 'false' autocomplete = 'off' class = 'textField' name = 't1' id = 't1' maxlength = "20"></td>
+            </tr>
+            <tr>
+                <td><div style = "padding-top: 20px"></div></td>
+                <td><div style = "padding-top: 20px"></div></td>
+            </tr>
+            <tr>
+                <td>Имя&nbsp;&nbsp;&nbsp;</td>
+                <td><input  type = 'text' spellcheck = 'false' autocomplete = 'off' class = 'textField' name = 't2' id = 't2' maxlength = "20"></td>
+            </tr>
+        </table>
+        <div style = "padding-top: 20px"></div>
+        <!--<button class="ui-button ui-widget ui-corner-all" onclick = "elem('t3').click();">Выбрать изображение</button>-->
+        <input name = 't3' id = "t3" type = "file" hidden />
+        <input id = "submitBtn" type = "submit" hidden>
+    </form>
+</div>
+
+<script>
+	$( "#my_dialog_1" ).dialog({
+	autoOpen: false,
+	width: 600,
+	buttons: [{
+			text: "Редактировать",
+			click: function() {
+                elem("submitBtn").click();
+			}
+		}, {
+			text: "Закрыть",
+			click: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	]});
+</script>
+
+
+<style>
+    .linkStyle {
+        cursor: pointer;
+        text-decoration: underline;
+        color: blue;
+    }
+
+    .linkStyle:hover {
+        color: #4a62dd;
+    }
+
+    #myHeaderBox {
+        padding: 20px;
+        border: solid 2px black;
+        border-radius: 10px;
+    }
+</style>
+
+<div id = "myHeaderBox" align = "center">
+    <span onclick = " window.location = '/my_page' " class = "linkStyle">Моя страница</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/users_list' " class = "linkStyle">Страницы других пользователей</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/discuss_forums' "  class = "linkStyle">Темы обсуждения</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = "goOut()" class = "linkStyle">Выход</span>
+</div>
+
+<div style = "padding-top: 25px;"></div>
+<h1>Моя страница</h1>
+<hr>
+<p style = 'font-size: 20px;' id = "userNameLabel"></span>
+
+<div style = "padding-top: 30px"></div>
+
+
+<table>
+    <tr>
+        <td>
+            <img id = "userImage" width = "128px" height = "128px" src = "./../static/images/userBasic.png">
+        </td>
+        <td>
+            <span style = "padding-left: 25px"></span>
+        </td>
+        <td style = "font-size: 20px">
+            <table>
+                <tr> <td>Фамилия: &nbsp;&nbsp;</td> <td id = 'x1'>неизвестно</td> </tr>
+                <tr> <td>Имя: </td> <td id = 'x2'>неизвестно</td> </tr>
+            </table>
+
+            <div style = "padding-top: 60px"></div>
+        </td>
+    </tr>
+</table>
+
+<div style = "padding-top: 30px"></div>
+
+<button class="ui-button ui-widget ui-corner-all" onclick = "openWind()">Редактировать профиль</button>
+
+<div style = "padding-top: 30px"></div>
+<hr>
+<div style = "padding-top: 30px"></div>
+
+
+<form enctype="multipart/form-data" action = "/add_record/" method = "POST">
+        {% csrf_token %}
+        <p>Введите текст записи</p>
+        <textarea  name = 'tttt' spellcheck = 'false' autocomplete = 'off' class = 'textField' style = "height: 200px; max-height: 300px; max-width: 800px;"></textarea>
+        <div style = "padding-top: 30px"></div>
+        <input type = 'submit' value = 'Добавить запись' class="ui-button ui-widget ui-corner-all">
+        <div style = "padding-top: 30px"></div>
+</form>
+
+<div id = "recodrsContent"></div>
+
+<script>
+    function getUserRecords() {
+        let r = new XMLHttpRequest();
+        r.open("GET", "/get_user_records");
+        r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+        r.send(null);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4 && r.status === 200) {
+               let bigString = r.responseText + "";
+               let mass = [];
+               mass = bigString.split("~~@@~~@@~~@@~~@@===");
+               let answerStr = "";
+
+               let n = 0;
+               for(let i = 0; i < mass.length; i++) {
+                   if(mass[i].length !== 0) {
+                       n++;
+                   }
+               }
+
+               for(let i = 0; i < mass.length; i++) {
+                   if(mass[i] !== "") {
+                       let strRecord = "<div style = 'background: #CCCCCC; padding: 15px; border-radius: 5px;'>";
+                       strRecord += "<h3>Запись " + n + "</h3>";
+                       n--;
+                       strRecord += htmlentities(mass[i]);
+                       strRecord += "<br><br></div>";
+                       strRecord += '<div style = "padding-top: 15px"></div>';
+                       answerStr += strRecord;
+                   }
+
+               }
+               elem("recodrsContent").innerHTML = answerStr;
+            }
+        }
+    }
+</script>
+
+
+<script>
+    document.title = "Моя страница";
+    window.onload = function() {
+
+       const loginValue = localStorage.getItem('userLogin');
+       if(loginValue === null || loginValue === undefined) {
+           window.location = "/";
+       } else {
+           elem("t1").value = "неизвестно";
+           elem("t2").value = "неизвестно";
+
+           elem('userNameLabel').innerHTML = "Пользователь " + "<b>" + loginValue + "</b>";
+           elem("centerBox").hidden = false;
+           controlSession();
+           getUserRecords();
+
+           getUserProperties(() => {
+               const UserProp = localStorage.getItem("UserProp");
+               let mass = [];
+               mass = UserProp.split("@@@@@@~~~~~~");
+               elem("x1").innerHTML = htmlentities(mass[0] + "");
+               elem("x2").innerHTML = htmlentities(mass[1] + "");
+               elem("t1").value = mass[0] + "";
+               elem("t2").value = mass[1] + "";
+           });
+       }
+    };
+
+    function openWind() {
+        $( "#my_dialog_1" ).dialog( "open" );
+    }
+</script>
+
+{% endblock %}

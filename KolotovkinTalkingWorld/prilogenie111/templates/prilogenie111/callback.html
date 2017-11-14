@@ -1,0 +1,67 @@
+{% extends 'prilogenie111/my_template.html' %}
+{% block content %}
+
+<h1 id = 'myHeader'>Talking World</h1>
+<hr>
+
+<div style = "padding-top: 30px"></div>
+
+<p style = 'font-size: 20px;' id = 'contentText'>Добро пожаловать на сайт <b>Talking World</b>.</p>
+
+<div style = "padding-top: 30px"></div>
+
+<button id = 'btn' class="ui-button ui-widget ui-corner-all" onclick = "f()">Авторизация</button>
+
+<script>
+    let pageLink = "/";
+
+    function f() {
+        window.location = pageLink;
+    }
+
+    window.onload = function() {
+       const type = getType();
+
+       switch(type) {
+           case "reg_no":
+               renderResult("Результат регистрации", "Пользователь с таким логином уже есть в базе данных.<br>Попробуйте зарегистрироваться ещё раз.", "Регистрация", "/registration");
+               break;
+
+           case "reg_yes":
+               renderResult("Результат регистрации", "Вы успешно зарегистрировались на сайте.<br>Теперь вам нужно войти в свой аккаунт.", "Авторизация", "/");
+               break;
+
+           case "auth_no":
+               renderResult("Результат авторизации", "Вы ввели неверный логин или пароль.<br>Попробуйте пройти авторизацию ещё раз.", "Авторизация", "/");
+               break;
+
+           case "change_user_properties":
+               renderResult("Изменение данных", "Ваши данные успешно отредактированы.<br>Теперь вам необходимо вернуться на вашу личную страницу.", "Моя страница", "/my_page");
+               break;
+
+           case "add_record":
+               renderResult("Добавление записи", "Новая запись успешно добавлена на вашу страницу.<br>Теперь вам необходимо вернуться на вашу личную страницу.", "Моя страница", "/my_page");
+               break;
+       }
+
+       elem("centerBox").hidden = false;
+    };
+
+    function getType() {
+        let s = window.location.toString();
+        let mass = [];
+        mass = s.split("/");
+        return mass[mass.length - 1].toString();
+    }
+
+    function renderResult(headerAndTitle, textContent, buttonText, link){
+        document.title = headerAndTitle.toString();
+        elem('myHeader').innerHTML = headerAndTitle.toString();
+        elem('contentText').innerHTML = textContent.toString();
+        elem('btn').innerHTML = buttonText.toString();
+        pageLink = link.toString();
+
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends 'prilogenie111/my_template.html' %}
+{% block content %}
+
+<style>
+    .linkStyle {
+        cursor: pointer;
+        text-decoration: underline;
+        color: blue;
+    }
+
+    .linkStyle:hover {
+        color: #4a62dd;
+    }
+
+    #myHeaderBox {
+        padding: 20px;
+        border: solid 2px black;
+        border-radius: 10px;
+    }
+</style>
+
+<div id = "myHeaderBox" align = "center">
+    <span onclick = " window.location = '/my_page' " class = "linkStyle">Моя страница</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/users_list' " class = "linkStyle">Страницы других пользователей</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = " window.location = '/discuss_forums' "  class = "linkStyle">Темы обсуждения</span>
+    <span style = "padding-left: 25px"></span>
+    <span onclick = "goOut()" class = "linkStyle">Выход</span>
+</div>
+
+
+<div style = "padding-top: 25px;"></div>
+<h1>Список пользователей</h1>
+<hr>
+<div style = "padding-top: 30px"></div>
+
+<style>
+    td {
+        width: 600px;
+        background: #CCCCCC;
+        padding: 10px;
+    }
+
+    td:hover {
+        cursor: pointer;
+        background: #a6c9e2;
+    }
+</style>
+
+<div style = "font-size: 20px;" id = "usersContent"></div>
+
+
+<script>
+    document.title = "Список пользователей";
+    window.onload = function() {
+        const loginValue = localStorage.getItem('userLogin');
+        if(loginValue === null || loginValue === undefined) {
+            window.location = "/";
+        } else {
+            controlSession();
+            getAllUsersLogins();
+            elem("centerBox").hidden = false;
+        }
+    };
+
+    function getAllUsersLogins() {
+        let r = new XMLHttpRequest();
+        r.open("GET", "/get_list_of_users");
+        r.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+        r.send(null);
+        r.onreadystatechange = function() {
+            if(r.readyState === 4 && r.status === 200) {
+               let result = r.responseText + "";
+               let mass = [];
+               mass = result.split("~~@@~~@@~~@@~~@@===");
+               let bigString = "<table>";
+               for(let i = 0; i < mass.length; i++) {
+                   if(mass[i].length !== 0) {
+                       bigString = bigString + "<tr><td onclick = 'goToUser(this);'>" +mass[i] + "</td></tr>";
+                   }
+               }
+               bigString += "</table>";
+               elem("usersContent").innerHTML = bigString;
+            }
+        }
+    }
+
+    function goToUser(element) {
+        const loginUserFowWatching = element.innerHTML + "";
+        localStorage.setItem("loginUserFowWatching", loginUserFowWatching);
+        window.location = "/watch_user";
+    }
+
+</script>
+
+
+
+{% endblock %}

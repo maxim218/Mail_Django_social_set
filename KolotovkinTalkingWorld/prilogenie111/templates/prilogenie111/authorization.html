@@ -1,0 +1,81 @@
+{% extends 'prilogenie111/my_template.html' %}
+{% block content %}
+
+<div id = 'my_dialog_1' title = "Сообщение">
+    <br>
+    <span style = "font-size: 20px">Некорректный ввод</span>
+    <br>
+</div>
+
+<script>
+    $( "#my_dialog_1" ).dialog({
+	autoOpen: false,
+	width: 300,
+	buttons: [{
+			text: "Закрыть",
+			click: function() {
+				$( this ).dialog( "close" );
+			}
+		}
+	]});
+</script>
+
+<h1>Авторизация</h1>
+<hr>
+
+<div style = "padding-top: 30px"></div>
+
+<table>
+    <tr>
+        <td>Логин</td>
+        <td><input type = 'text' spellcheck = 'false' autocomplete = 'off' class = 'textField' id = 't1' maxlength = "20"></td>
+    </tr>
+    <tr>
+        <td><div style = "padding-top: 20px"></div></td>
+        <td><div style = "padding-top: 20px"></div></td>
+    </tr>
+    <tr>
+        <td>Пароль&nbsp;&nbsp;&nbsp;</td>
+        <td><input type = 'text' spellcheck = 'false' autocomplete = 'off' class = 'textField' id = 't2' maxlength = "20"></td>
+    </tr>
+</table>
+
+<div style = "padding-top: 30px"></div>
+
+<button id = 'b1' class="ui-button ui-widget ui-corner-all" onclick = "authUser()">Войти в аккаунт</button>
+<button id = 'b2' class="ui-button ui-widget ui-corner-all" onclick= "goToRegistration()">Регистрация</button>
+
+<form method = "POST" action = "/auth_user/" hidden>
+    {% csrf_token %}
+    <input type = 'text' id = 'a' name = 'a'>
+    <input type = 'text' id = 'b' name = 'b'>
+    <input type = 'submit' id = 'submitBtn'>
+</form>
+
+<script>
+    document.title = "Авторизация";
+    window.onload = function() {
+       elem("centerBox").hidden = false;
+    };
+
+    function goToRegistration() {
+        window.location = "/registration";
+    }
+
+    function authUser() {
+        elem('a').value = elem('t1').value;
+        elem('b').value = elem('t2').value;
+
+        const x1 = correctString(elem('a').value);
+        const x2 = correctString(elem('b').value);
+
+        if(x1 === false || x2 === false) {
+            $( "#my_dialog_1" ).dialog( "open" );
+        } else {
+            localStorage.setItem("userLogin", elem('a').value);
+            elem('submitBtn').click();
+        }
+    }
+</script>
+
+{% endblock %}
